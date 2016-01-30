@@ -5,42 +5,40 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerGrabObject : CollisionHandler {
 
-	public GameObject grabbedObjectsContainer;
+	public GameObject grabbedObject;
 
 	private bool isGrabbedObject;
-	private GameObject inventoryObject;
 
 	protected override void GrabbedObjectCollisionEnter(GameObject objectGrabbed) {
 		isGrabbedObject = true;
-		inventoryObject = objectGrabbed;
+		grabbedObject = objectGrabbed;
 	}
 
 	protected override void GrabbedObjectCollisionExit(GameObject objectGrabbed) {
 		isGrabbedObject = false;
-		inventoryObject = null;
+		grabbedObject = null;
 	}
 
 	private void Update() {
 		if(CrossPlatformInputManager.GetButtonDown("Fire1")) {
-			DropObject();
+			//DropObject();
 			GrabbedObject();
 		}
 	}
 
 	private void GrabbedObject() {
 		if(isGrabbedObject) {
-			inventoryObject.transform.parent = grabbedObjectsContainer.transform;
-			inventoryObject.transform.position = grabbedObjectsContainer.transform.position;
-			inventoryObject.transform.rotation = grabbedObjectsContainer.transform.rotation;
+
+			grabbedObject.transform.parent = gameObject.transform;
+			Debug.Log(grabbedObject.transform.localScale.y);
+			grabbedObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y +2.5f);
+			grabbedObject.transform.rotation = gameObject.transform.rotation;
+			//grabbedObject.transform.parent = gameObject.transform;
 		}
 	}
 
 	public void DropObject() {
-		if(grabbedObjectsContainer.transform.childCount != 0) {
-			
-			//grabbedObjectsContainer.transform.position = gameObject.transform.position;
-			//inventoryObject.transform.parent = null;
-			//grabbedObjectsContainer = null;
-		}
+		grabbedObject.transform.parent = null;
+		grabbedObject = null;
 	}
 }
