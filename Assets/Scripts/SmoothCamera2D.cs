@@ -8,6 +8,7 @@ public class SmoothCamera2D : MonoBehaviour {
 	public Transform target;
 	public Camera camera;
 
+
 	void FixedUpdate () 
 	{
 		if (target)
