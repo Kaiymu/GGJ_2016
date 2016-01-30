@@ -13,17 +13,23 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
-	public bool GoRight() {
+	public int GoHorizontal() {
 		if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-			return true;
+			return 1;
 		}
-		return false;
+
+		if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+			return -1;
+		}
+
+		return 0;
 	}
 
-	public bool GoLeft() {
-		if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-			return true;
+	public int GoVertical() {
+		if(Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
+			return 1;
 		}
-		return false;
+		return 0;
 	}
+
 }
