@@ -10,6 +10,10 @@ public abstract class CollisionHandler : MonoBehaviour {
 		if(col.gameObject.tag == "GrabbedObject") {
 			GrabbedObjectCollisionEnter(col.gameObject);
 		}
+
+		if(col.gameObject.tag == "Ball") {
+			BallCollisionEnter(col.gameObject);
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D col) {
@@ -25,6 +29,9 @@ public abstract class CollisionHandler : MonoBehaviour {
 	}
 
 	protected virtual void GrabbedObjectCollisionEnter(GameObject grabbedObject) {
+	}
+
+	protected virtual void BallCollisionEnter(GameObject player) {
 	}
 
 
