@@ -13,6 +13,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 	public bool canClimbLadder;
 	public FlipSprite flipSprite;
+	[HideInInspector]
+	public float velocityPlayer;
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
@@ -70,6 +72,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 				
 		m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, temptVelocityY);
 
+		velocityPlayer = move;
         if (move > 0 && !m_FacingRight)
         {
 			m_FacingRight = flipSprite.Flip(m_FacingRight);
