@@ -4,6 +4,7 @@ using System.Collections;
 public class BallTrigger : CollisionHandler {
 
 	protected override void BallCollisionEnter(GameObject ball) {
-		//EventManager.instance.gameEvents = GAME_EVENTS.BALL;
+		EventManager.instance.gameEvents = GAME_EVENTS.BALL;
+        Debug.Log("Hey");
 	}
 }
