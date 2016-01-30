@@ -7,38 +7,49 @@ public class PlayerGrabObject : CollisionHandler {
 
 	public GameObject grabbedObject;
 
-	private bool isGrabbedObject;
+	private bool _isGrabbedObject;
+	private bool _objectInInventory = false;
 
 	protected override void GrabbedObjectCollisionEnter(GameObject objectGrabbed) {
-		isGrabbedObject = true;
+		_isGrabbedObject = true;
 		grabbedObject = objectGrabbed;
 	}
 
 	protected override void GrabbedObjectCollisionExit(GameObject objectGrabbed) {
-		isGrabbedObject = false;
-		grabbedObject = null;
+		if(!_objectInInventory) {
+			_isGrabbedObject = false;
+			grabbedObject = null;
+		}
 	}
 
 	private void Update() {
-		if(CrossPlatformInputManager.GetButtonDown("Fire1")) {
-			//DropObject();
-			GrabbedObject();
+		if(CrossPlatformInputManager.GetButtonDown("Fire1") && _isGrabbedObject) {
+			if(_objectInInventory) {
+				_objectInInventory = false;
+			} else {
+				_objectInInventory = true;
+			}
+				
+			if(_objectInInventory) {
+				GrabbedObject();
+			} else {
+				DropObject();
+			}
 		}
 	}
 
 	private void GrabbedObject() {
-		if(isGrabbedObject) {
-
+		if(_isGrabbedObject) {
 			grabbedObject.transform.parent = gameObject.transform;
-			Debug.Log(grabbedObject.transform.localScale.y);
 			grabbedObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y +2.5f);
 			grabbedObject.transform.rotation = gameObject.transform.rotation;
-			//grabbedObject.transform.parent = gameObject.transform;
 		}
 	}
 
 	public void DropObject() {
-		grabbedObject.transform.parent = null;
-		grabbedObject = null;
+		if(grabbedObject != null && _isGrabbedObject) {
+			grabbedObject.transform.parent = null;
+			grabbedObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+		}
 	}
 }
