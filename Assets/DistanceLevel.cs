@@ -18,8 +18,6 @@ public class DistanceLevel : MonoBehaviour {
 
 	void Update () {
 		float distancePlayerEnd = Vector2.Distance(distancePlayer.transform.position, distanceStart.transform.position);
-
 		fadeInColor.playerProgression = (100 / maxDistance) * distancePlayerEnd;
-        Debug.Log(fadeInColor.playerProgression);
 	}
 }
