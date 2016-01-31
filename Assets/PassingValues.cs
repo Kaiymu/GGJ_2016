@@ -18,5 +18,7 @@ public class PassingValues : MonoBehaviour {
 		GameManager.instance.beginCube = beginCube;
 		GameManager.instance.endCube = endCube;
 		GameManager.instance.victoryCondition = victoryCondition;
+
+		GameManager.instance.beginCollider = beginCollision;
 	}
 }
