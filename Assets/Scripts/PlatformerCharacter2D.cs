@@ -44,15 +44,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                 m_Grounded = true;
         }
 			
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-				m_Grounded = true;
-		}
-        m_Anim.SetBool("Ground", m_Grounded);
-
-        // Set the vertical animation
-        m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+		m_Anim.SetBool("Ground", m_Grounded);
     }
 		
     public void Move(float move, bool jump)
@@ -65,9 +57,11 @@ public class PlatformerCharacter2D : MonoBehaviour
 		if(canClimbLadder) {
 			m_Rigidbody2D.gravityScale = 0;
 			temptVelocityY = CrossPlatformInputManager.GetAxis("Jump") * m_JumpForce;
+			m_Grounded = false;
 		} else {
 			m_Rigidbody2D.gravityScale = 3;
 			temptVelocityY = m_Rigidbody2D.velocity.y;
+			//m_Grounded = true;
 		}
 				
 		m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, temptVelocityY);
@@ -80,12 +74,6 @@ public class PlatformerCharacter2D : MonoBehaviour
         else if (move < 0 && m_FacingRight)
         {
 			m_FacingRight = flipSprite.Flip(m_FacingRight);
-        }
-
-        if (m_Grounded && jump && m_Anim.GetBool("Ground"))
-        {
-            m_Grounded = false;
-            m_Anim.SetBool("Ground", false);
         }
     }
 }
