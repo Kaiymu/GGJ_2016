@@ -4,12 +4,12 @@ using UnityStandardAssets._2D;
 
 public class Ladder : MonoBehaviour {
 
-	public GameObject player;
+	private GameObject _player;
 
 	private PlatformerCharacter2D _playerMovement;
 
-	private void Awake() {
-		_playerMovement = player.GetComponent<PlatformerCharacter2D>();
+	private void Start() {
+		_playerMovement = GameManager.instance.player.GetComponent<PlatformerCharacter2D>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {

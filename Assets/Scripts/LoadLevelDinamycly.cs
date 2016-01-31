@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LoadLevelDinamycly : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	public void Start() {
+		LevelToLoad(1);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void LevelToLoad(int index) {
+		SceneManager.LoadScene(index);
 	}
 }

@@ -3,12 +3,11 @@ using System.Collections;
 
 public class ParallaxImpulse : MonoBehaviour {
 
-	public GameObject player;
 	public float speed;
 
 	private PlatformerCharacter2D _velocityPlayer;
 	void Start () {
-		_velocityPlayer = player.GetComponent<PlatformerCharacter2D>();
+		_velocityPlayer = GameManager.instance.player.GetComponent<PlatformerCharacter2D>();
 	}
 	
 	// Update is called once per frame
