@@ -12,6 +12,8 @@ public class PassingValues : MonoBehaviour {
 	public GameObject beginCollision;
 	public GameObject endCollision;
 
+	public GameObject currentCubeMaster;
+
 	private void Awake() {
 		GameManager.instance.rootObject = rootObject;
 		GameManager.instance.objectToTeleportNextScene = objectToTeleportNextScene;
@@ -20,5 +22,7 @@ public class PassingValues : MonoBehaviour {
 		GameManager.instance.victoryCondition = victoryCondition;
 
 		GameManager.instance.beginCollider = beginCollision;
+
+		GameManager.instance.currentCubeMaster = currentCubeMaster;
 	}
 }

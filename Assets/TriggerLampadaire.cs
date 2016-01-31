@@ -9,7 +9,7 @@ public class TriggerLampadaire : CollisionHandler {
 	{
 		if(lesBailsDePol) {
 			//GameManager.instance.player =  Joué l'animation du player
-			StartCoroutine(GameManager.instance.LoadNextLevelAsync());
+			GameManager.instance.LoadNextSceneAssyncTest();
 			lesBailsDePol = false;
 		}
 	}

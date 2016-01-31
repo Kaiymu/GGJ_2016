@@ -10,17 +10,21 @@ public class GameManager : MonoBehaviour {
 	public GAME_EVENTS victoryCondition;
 	public static GameManager instance;
 
-	public int currentLevel = 1;
+	public int currentLevel = 0;
 
 	public GameObject test;
 	public GameObject rootObject;
 	public GameObject objectToTeleportNextScene;
+	public GameObject objectToTeleportPrevious;
 	public GameObject player;
 	public GameObject light;
 	public GameObject beginCube;
 	public GameObject endCube;
 	public GameObject beginCollider;
 	public GameObject endCollider;
+
+	public GameObject currentCubeMaster;
+	public GameObject previousCubeMaster;
 
 	public GameObject[] scenesRoot = new GameObject[3];
 
@@ -44,9 +48,15 @@ public class GameManager : MonoBehaviour {
 		yield return ao;
 	}
 
+	public void LoadNextSceneAssyncTest() {
+		objectToTeleportPrevious = objectToTeleportNextScene;
+		StartCoroutine(LoadNextLevelAsync());
+	}
+
 	public void LoadNextLevel() {
 		currentLevel++;
 	}
+		
 
 	public void SetCubes(GameObject cubeBegin, GameObject cubeEnd) {
 		beginCube = cubeBegin;
@@ -54,9 +64,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void TeleportNextScene() {
-		rootObject.transform.position = test.transform.position;
+		rootObject.transform.position = objectToTeleportPrevious.transform.position;
 
 		beginCollider.SetActive(false);
+	}
+
+	public void CubeMasterLight() {
+		//currentCubeMaster.GetComponent<DistanceLevel>().distanceStart = 
 	}
 
 	bool doneLoadingScene = false;
