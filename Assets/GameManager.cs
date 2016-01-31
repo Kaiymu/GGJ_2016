@@ -10,17 +10,17 @@ public class GameManager : MonoBehaviour {
 	public GAME_EVENTS victoryCondition;
 	public static GameManager instance;
 
-	public int currentLevel = 0;
+	public int currentLevel = 1;
 
 	public GameObject test;
 	public GameObject rootObject;
 	public GameObject objectToTeleportNextScene;
 	public GameObject player;
+	public GameObject light;
 	public GameObject beginCube;
 	public GameObject endCube;
 
 	public GameObject[] scenesRoot = new GameObject[3];
-
 
 	void Awake() {
 		if(instance == null) {
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void Start() {
+		LoadNextLevel();
 		StartCoroutine(LoadNextLevelAsync());
 	}
 
@@ -42,8 +43,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void LoadNextLevel() {
-		//currentLevel++;
-		SceneManager.LoadScene(currentLevel, LoadSceneMode.Additive);
+		currentLevel++;
 	}
 
 	public void SetCubes(GameObject cubeBegin, GameObject cubeEnd) {
@@ -51,13 +51,8 @@ public class GameManager : MonoBehaviour {
 		endCube = cubeEnd;
 	}
 
-	public void SetPlayer(GameObject player) {
-		player = player;
-	}
-
 	public void TeleportNextScene() {
-		rootObject.transform.parent = test.transform;
-		rootObject.SetActive(false);
+		rootObject.transform.position = test.transform.position;
 	}
 
 	bool doneLoadingScene = false;
@@ -69,6 +64,10 @@ public class GameManager : MonoBehaviour {
 				doneLoadingScene = true;
 				TeleportNextScene();
 			}
+		}
+
+		if(doneLoadingScene) {
+			TeleportNextScene();
 		}
 
 		if(gameEvents == victoryCondition) {

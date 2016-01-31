@@ -7,12 +7,13 @@ public class DistanceLevel : MonoBehaviour {
 	public GameObject distanceEnd;
 
 	public FadeInColor fadeInColor;
-		
 	public GameObject distancePlayer;
 
 	private float maxDistance;
 
 	void Start () {
+		distancePlayer = GameManager.instance.player;
+		fadeInColor = GameManager.instance.light.GetComponent<FadeInColor>();
 		maxDistance = Vector2.Distance(distanceStart.transform.position, distanceEnd.transform.position);
 	}
 
