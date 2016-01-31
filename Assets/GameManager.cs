@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public enum GAME_EVENTS{NONE, BALL, COLLIDE};
 public class GameManager : MonoBehaviour {
@@ -67,14 +66,14 @@ public class GameManager : MonoBehaviour {
 		rootObject.transform.position = objectToTeleportPrevious.transform.position;
 
 		beginCollider.SetActive(false);
-	}
+	}  
 
 	public void CubeMasterLight() {
 		//currentCubeMaster.GetComponent<DistanceLevel>().distanceStart = 
 	}
 
 	bool doneLoadingScene = false;
-	public void Update() {
+   	public void Update() {
 		if(ao != null && !doneLoadingScene)
 		{
 			if(ao.isDone)
