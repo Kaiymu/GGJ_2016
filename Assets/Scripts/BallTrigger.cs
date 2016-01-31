@@ -3,8 +3,13 @@ using System.Collections;
 
 public class BallTrigger : CollisionHandler {
 
+	private bool isGo = true;
+
 	protected override void BallCollisionEnter(GameObject ball) {
-		GameManager.instance.gameEvents = GAME_EVENTS.BALL;
-		GameManager.instance.endCollider.SetActive(false);
+		if(isGo) {
+			isGo = false;
+			GameManager.instance.gameEvents = GAME_EVENTS.BALL;
+			GameManager.instance.LoadNextSceneAssyncTest();
+		}
 	}
 }

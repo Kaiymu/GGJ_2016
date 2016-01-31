@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject beginCollider;
 	public GameObject endCollider;
 
+	public Vector3[] posNiveaux;
+
 	public GameObject currentCubeMaster;
 	public GameObject previousCubeMaster;
 
@@ -33,12 +35,22 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Destroy(this.gameObject);
 		}
+
+		InitializeArray();
 	}
 
-	private void Start() {
-		LoadNextLevel();
-		//StartCoroutine(LoadNextLevelAsync());
+	private void InitializeArray() {
+		posNiveaux = new Vector3[8];
+		posNiveaux[0] = new Vector3(355.6f, -0.13f, 0f);
+		posNiveaux[1] = new Vector3(506.03f, 6.83f, 0f);
+		posNiveaux[2] = new Vector3(744.6f, 3.45f, 0f);
+		posNiveaux[3] = new Vector3(1009.4f, 13.67f, 0f);
+		posNiveaux[4] = new Vector3(1262.86f, 17.08f, 0f);
+		posNiveaux[5] = new Vector3(1515.87f, 20.47f, 0f);
+		posNiveaux[6] = new Vector3(1769.2f, 23.9f, 0f);
 	}
+
+
 
 	AsyncOperation ao;
 	public IEnumerator LoadNextLevelAsync()
@@ -48,8 +60,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void LoadNextSceneAssyncTest() {
+		doneLoadingScene = false;
+		objectToTeleportPrevious = objectToTeleportNextScene;
+		LoadNextLevel();
         HideCollider();
-        objectToTeleportPrevious = objectToTeleportNextScene;
 		StartCoroutine(LoadNextLevelAsync());
 	}
 
@@ -64,14 +78,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void TeleportNextScene() {
-		rootObject.transform.position = objectToTeleportPrevious.transform.position;
-
+		Debug.Log(posNiveaux[currentLevel]);
+		rootObject.transform.position = posNiveaux[currentLevel-1];
 		beginCollider.SetActive(false);
 	}  
-
-	public void CubeMasterLight() {
-		//currentCubeMaster.GetComponent<DistanceLevel>().distanceStart = 
-	}
 
     private void HideCollider()
     {
