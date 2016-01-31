@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 
-public enum GAME_EVENTS{NONE, BALL};
+public enum GAME_EVENTS{NONE, BALL, COLLIDE};
 public class GameManager : MonoBehaviour {
 
 	public GAME_EVENTS gameEvents;
@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject light;
 	public GameObject beginCube;
 	public GameObject endCube;
+	public GameObject beginCollider;
+	public GameObject endCollider;
 
 	public GameObject[] scenesRoot = new GameObject[3];
 
@@ -32,11 +34,11 @@ public class GameManager : MonoBehaviour {
 
 	private void Start() {
 		LoadNextLevel();
-		StartCoroutine(LoadNextLevelAsync());
+		//StartCoroutine(LoadNextLevelAsync());
 	}
 
 	AsyncOperation ao;
-	IEnumerator LoadNextLevelAsync()
+	public IEnumerator LoadNextLevelAsync()
 	{
 		ao = SceneManager.LoadSceneAsync(currentLevel, LoadSceneMode.Additive);
 		yield return ao;
@@ -53,6 +55,8 @@ public class GameManager : MonoBehaviour {
 
 	public void TeleportNextScene() {
 		rootObject.transform.position = test.transform.position;
+
+		beginCollider.SetActive(false);
 	}
 
 	bool doneLoadingScene = false;
@@ -66,11 +70,8 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-		if(doneLoadingScene) {
-			TeleportNextScene();
-		}
-
 		if(gameEvents == victoryCondition) {
+			Debug.Log("win");
 			// Joué l'animation du lampadaire enflammée
 			// Désactivée la collision de fin de niveau.
 			// 
