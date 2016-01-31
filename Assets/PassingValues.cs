@@ -22,7 +22,8 @@ public class PassingValues : MonoBehaviour {
 		GameManager.instance.victoryCondition = victoryCondition;
 
 		GameManager.instance.beginCollider = beginCollision;
+        GameManager.instance.endCollider = endCollision;
 
-		GameManager.instance.currentCubeMaster = currentCubeMaster;
+        GameManager.instance.currentCubeMaster = currentCubeMaster;
 	}
 }

@@ -14,7 +14,13 @@ public abstract class CollisionHandler : MonoBehaviour {
 		if(col.gameObject.tag == "Ball") {
 			BallCollisionEnter(col.gameObject);
 		}
-	}
+
+        if (col.gameObject.tag == "Cig")
+        {
+            CigCollisionEnter(col.gameObject);
+        }
+
+    }
 
 	private void OnTriggerExit2D(Collider2D col) {
 		if(col.gameObject.tag == "Player") {
@@ -34,8 +40,13 @@ public abstract class CollisionHandler : MonoBehaviour {
 	protected virtual void BallCollisionEnter(GameObject player) {
 	}
 
+    protected virtual void CigCollisionEnter(GameObject player)
+    {
 
-	protected virtual void PlayerCollisionExit(GameObject player) {
+    }
+
+
+    protected virtual void PlayerCollisionExit(GameObject player) {
 	}
 
 	protected virtual void GrabbedObjectCollisionExit(GameObject grabbedObject) {

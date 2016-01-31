@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 
-public enum GAME_EVENTS{NONE, BALL, COLLIDE};
+public enum GAME_EVENTS{NONE, BALL, COLLIDE, FIRST_LOVE, SMOKE, WEDDING, DEATHPARENT, SCHOOL};
 public class GameManager : MonoBehaviour {
 
 	public GAME_EVENTS gameEvents;
@@ -49,7 +49,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void LoadNextSceneAssyncTest() {
-		objectToTeleportPrevious = objectToTeleportNextScene;
+        HideCollider();
+        objectToTeleportPrevious = objectToTeleportNextScene;
 		StartCoroutine(LoadNextLevelAsync());
 	}
 
@@ -72,6 +73,12 @@ public class GameManager : MonoBehaviour {
 	public void CubeMasterLight() {
 		//currentCubeMaster.GetComponent<DistanceLevel>().distanceStart = 
 	}
+
+    private void HideCollider()
+    {
+        beginCollider.SetActive(false);
+        endCollider.SetActive(false);
+    }
 
 	bool doneLoadingScene = false;
 	public void Update() {

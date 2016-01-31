@@ -5,6 +5,7 @@ public class alarmSchool : MonoBehaviour {
 
     private bool _first;
     private bool colli = false;
+    private float _count = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,14 @@ public class alarmSchool : MonoBehaviour {
 	void Update () {
 	    if (colli == true)
         {
-            //Balance alarme 10 secondes plus tard
+            _count += Time.deltaTime;
+            if (_count >= 20 && _first == false)
+            {
+                _first = true;
+                this.gameObject.GetComponent<AudioSource>().Play();
+                GameManager.instance.gameEvents = GAME_EVENTS.SCHOOL;
+                GameManager.instance.LoadNextSceneAssyncTest();
+            }
         }   
 	}
 
@@ -24,7 +32,7 @@ public class alarmSchool : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("Collision");
-            if (Application.loadedLevel == 6)
+            if (GameManager.instance.currentLevel == 5)
             {
                 colli = true;
                     //fin du code dans Update
