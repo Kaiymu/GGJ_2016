@@ -13,7 +13,9 @@ public class Ladder : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
-		if(col.gameObject.tag == "Player") {
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Player") {
+            Debug.Log("Yop");
 			_playerMovement.canClimbLadder = true;
 		}
 	}
